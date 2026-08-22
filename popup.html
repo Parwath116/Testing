@@ -1,0 +1,533 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>blockme</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root { color-scheme: dark; }
+
+    body {
+      margin: 0;
+      padding: 12px 14px;
+      width: 380px;
+      background: radial-gradient(900px 600px at 10% 10%, #0b1120, #020617);
+      color: #e5e7eb;
+      font-family: "Inter", system-ui, sans-serif;
+      font-size: 14px;
+      animation: fadeIn .25s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .popup-card {
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      border-radius: 18px;
+      padding: 10px 12px 12px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .logo-img {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .sub {
+      font-size: 11px;
+      opacity: 0.75;
+    }
+
+    .mode-pill {
+      margin-left: auto;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      border: 1px solid #1f2937;
+      background: #020617;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .mode-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .section-title {
+      margin: 8px 0 4px;
+      font-size: 13px;
+      font-weight: 600;
+      opacity: .9;
+    }
+
+    .timer {
+      font-variant-numeric: tabular-nums;
+      font-size: 34px;
+      text-align: center;
+      margin: 8px 0;
+      padding: 8px 0;
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    .row {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      margin: 4px 0;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 0;
+      background: #3b82f6;
+      color: #f9fafb;
+      cursor: pointer;
+      font-size: 13px;
+      white-space: nowrap;
+      transition: background .2s, transform .15s, box-shadow .15s;
+      box-shadow: 0 0 0 rgba(37, 99, 235, 0);
+    }
+    button.secondary { background: #111827; }
+    button.small { padding: 4px 8px; font-size: 12px; }
+
+    button:hover {
+      transform: translateY(-1px);
+      background: #2563eb;
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.45);
+    }
+    button:active {
+      transform: scale(0.96);
+      box-shadow: none;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      flex: 1;
+      padding: 6px 8px;
+      border-radius: 8px;
+      border: 1px solid #1f2937;
+      background: #020617;
+      color: #e5e7eb;
+      font-size: 13px;
+    }
+
+    input[type="number"] {
+      width: 70px;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      max-height: 110px;
+      overflow: auto;
+      border-radius: 8px;
+      border: 1px dashed #1f2937;
+    }
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 8px;
+      border-bottom: 1px solid #020617;
+      font-size: 13px;
+    }
+
+    .pill {
+      background: #020617;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 12px;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .badge {
+      background: #0f172a;
+      border-radius: 999px;
+      padding: 2px 8px;
+      border: 1px solid #1d283a;
+      font-size: 11px;
+    }
+
+    .group-box {
+      background:#020617;
+      border:1px solid #1f2937;
+      padding:8px;
+      border-radius:10px;
+      margin-top:8px;
+    }
+
+    .members,
+    .chat-box {
+      max-height: 80px;
+      overflow: auto;
+      padding: 6px;
+      border-radius: 8px;
+      border: 1px dashed #1f2937;
+      font-size: 12px;
+    }
+
+    .chat-msg {
+      margin-bottom: 4px;
+      padding: 4px 6px;
+      background: #0f172a;
+      border-radius: 6px;
+    }
+
+    .chat-author {
+      font-weight: 600;
+      margin-right: 4px;
+    }
+
+    .meta {
+      margin-top: 6px;
+      font-size: 12px;
+      opacity: 0.85;
+    }
+
+    .status-dot {
+      display: inline-block;
+      width: 9px;
+      height: 9px;
+      margin-right: 6px;
+      border-radius: 50%;
+      background: #94a3b8;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-top: 4px;
+      margin-bottom: 4px;
+    }
+
+    .stat-pill {
+      border-radius: 10px;
+      border: 1px solid #1f2937;
+      background: #020617;
+      padding: 4px 6px;
+      font-size: 11px;
+    }
+
+    .stat-label {
+      opacity: 0.7;
+      font-size: 10px;
+    }
+
+    .stat-value {
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .leaderboard {
+      margin-top: 6px;
+      border-radius: 8px;
+      border: 1px dashed #1f2937;
+      padding: 6px;
+      font-size: 12px;
+      max-height: 80px;
+      overflow: auto;
+    }
+
+    .leader-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 3px;
+    }
+
+    .leader-rank {
+      font-weight: 600;
+    }
+
+    .study-box {
+      border-radius: 10px;
+      border: 1px dashed #1f2937;
+      padding: 8px;
+      margin-top: 4px;
+      background: rgba(15, 23, 42, 0.7);
+      font-size: 12px;
+    }
+
+    .study-box label {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .study-box .row {
+      margin-top: 4px;
+    }
+
+    .hint-text {
+      font-size: 11px;
+      opacity: 0.7;
+      margin-top: 2px;
+    }
+
+    .timer-settings-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .setting-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 12px;
+    }
+
+    .setting-label {
+      opacity: 0.8;
+    }
+
+    .timer-buttons-row {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      margin-top: 4px;
+    }
+
+    .summary-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.92);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .summary-card {
+      width: 100%;
+      max-width: 360px;
+      background: #020617;
+      border-radius: 16px;
+      border: 1px solid #1f2937;
+      padding: 12px 12px 10px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.8);
+      max-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .summary-title {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .summary-meta {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .summary-body {
+      font-size: 13px;
+      padding: 6px;
+      border-radius: 8px;
+      border: 1px solid #1f2937;
+      background: #020617;
+      max-height: 180px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+
+    .summary-status {
+      font-size: 11px;
+      opacity: 0.8;
+      min-height: 14px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="popup-card">
+    <div class="logo-row">
+      <img src="assets/logo.png" class="logo-img" alt="blockme logo" />
+
+      <div>
+        <h1>blockme</h1>
+        <div class="sub">Pomodoro blocker · XP + badges · solo or group study</div>
+      </div>
+      <div class="mode-pill">
+        <span class="mode-dot"></span>
+        <span id="modeLabel">Solo</span>
+      </div>
+    </div>
+
+    <div class="row" style="margin-bottom:2px;">
+      <label><input type="radio" name="mode" value="alone" checked> Alone</label>
+      <label><input type="radio" name="mode" value="group"> Group</label>
+      <span style="font-size:11px;opacity:0.7;" id="groupModeLabel">Mode: Alone</span>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-pill">
+        <div class="stat-label">XP</div>
+        <div class="stat-value" id="statXP">0</div>
+      </div>
+      <div class="stat-pill">
+        <div="stat-label">Sessions</div>
+        <div class="stat-value" id="statSessions">0</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-label">Streak</div>
+        <div class="stat-value" id="statStreak">0 days</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-label">Total</div>
+        <div class="stat-value" id="statTotal">0 min</div>
+      </div>
+    </div>
+
+    <div class="study-box">
+      <div class="section-title" style="margin-top:0;">Study details</div>
+      <div class="row">
+        <label style="width:60px;">Subject</label>
+        <input type="text" id="subject" placeholder="e.g. DAA, OOPS" />
+      </div>
+      <div class="row">
+        <label style="width:60px;">Topic</label>
+        <input type="text" id="topic" placeholder="e.g. Greedy Algorithms" />
+      </div>
+      <div class="hint-text">
+        These will be used to generate a quick AI summary after your focus session.
+      </div>
+    </div>
+
+    <div class="timer" id="timer">01:00</div>
+    <div class="timer-buttons-row">
+      <button id="start">▶ Start</button>
+      <button id="pause" class="secondary">⏸ Pause</button>
+      <button id="reset" class="secondary">⏹ Reset</button>
+    </div>
+
+    <div class="section-title">Timer settings</div>
+    <div class="timer-settings-grid">
+      <div class="setting-item">
+        <span class="setting-label">Focus (min)</span>
+        <input type="number" id="focus" min="1" max="180" step="1" />
+      </div>
+      <div class="setting-item">
+        <span class="setting-label">Short break</span>
+        <input type="number" id="short" min="1" max="180" step="1" />
+      </div>
+      <div class="setting-item">
+        <span class="setting-label">Long break</span>
+        <input type="number" id="long" min="1" max="180" step="1" />
+      </div>
+    </div>
+    <div class="row">
+      <label><input type="checkbox" id="autoloop" /> Auto-loop</label>
+    </div>
+
+    <div class="section-title">Blocked websites</div>
+    <div class="row">
+      <input type="text" id="domain" placeholder="e.g. youtube.com" />
+      <button id="add">Add</button>
+    </div>
+    <ul id="list"></ul>
+
+    <div class="section-title">Badges</div>
+    <div class="badges" id="badges"></div>
+
+    <div class="meta">
+      <span class="status-dot" id="statusDot"></span>
+      <span>Status: <span id="status">idle</span></span>
+    </div>
+
+    <div id="groupBox" class="group-box">
+      <div class="section-title" style="margin-top:0;">Group study</div>
+      <input type="text" id="displayName" placeholder="Your name" />
+
+      <div class="row">
+        <button id="createRoom" class="small">Create</button>
+        <input type="text" id="joinCode" placeholder="12345" style="width:80px;" />
+        <button id="joinRoom" class="small secondary">Join</button>
+      </div>
+
+      <div class="row">
+        <span>Room: <b id="roomCodeLabel">—</b></span>
+        <span>Role: <b id="roleLabel">—</b></span>
+      </div>
+
+      <div class="row">
+        <button id="endRoom" class="small secondary">End room</button>
+        <button id="leaveRoom" class="small secondary">Leave</button>
+      </div>
+
+      <div class="section-title" style="margin-top:4px;font-size:12px;">Members</div>
+      <div class="members" id="members"></div>
+
+      <div class="section-title" style="margin-top:4px;font-size:12px;">Leaderboard</div>
+      <div class="leaderboard" id="leaderboard"></div>
+
+      <div class="section-title" style="margin-top:4px;font-size:12px;">Chat</div>
+      <div class="chat-box" id="chatBox"></div>
+
+      <div class="row">
+        <input type="text" id="chatInput" placeholder="Type a message..." />
+        <button id="sendChat" class="small secondary">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="summaryOverlay" class="summary-overlay hidden">
+    <div class="summary-card">
+      <h2 class="summary-title">AI topic summary</h2>
+      <div id="summaryMeta" class="summary-meta"></div>
+      <div id="summaryBody" class="summary-body"></div>
+      <div id="summaryStatus" class="summary-status"></div>
+      <div class="row" style="justify-content:flex-end;margin-top:4px;">
+        <button id="summaryClose" class="small secondary">Close</button>
+        <button id="summaryCopy" class="small">Copy</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

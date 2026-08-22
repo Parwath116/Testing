@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Blocked by blockme</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root { color-scheme: dark; }
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(1200px 600px at 10% 10%, #0f172a, #020617);
+      color: #e5e7eb;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .card {
+      max-width: 720px;
+      padding: 24px;
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      box-shadow:
+        0 0 22px rgba(59, 130, 246, 0.35),
+        0 24px 60px rgba(0, 0, 0, .7);
+      text-align: center;
+    }
+    .logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      object-fit: cover;
+      box-shadow: 0 0 12px rgba(59, 130, 246, 0.7);
+      margin-bottom: 8px;
+    }
+    h1 {
+      margin: 0 0 6px;
+      font-size: 22px;
+      font-weight: 600;
+    }
+    #countdown {
+      font-variant-numeric: tabular-nums;
+      font-size: 40px;
+      margin: 10px 0 14px;
+    }
+    .quote {
+      font-size: 15px;
+      margin: 4px 0 10px;
+      opacity: .95;
+    }
+    .riddle {
+      font-size: 14px;
+      margin: 6px 0 14px;
+      border-radius: 10px;
+      border: 1px dashed #334155;
+      padding: 10px;
+      background: #020617;
+    }
+    .hint {
+      font-size: 12px;
+      opacity: .7;
+    }
+    .footer {
+      font-size: 13px;
+      opacity: .8;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="logo.png" alt="blockme logo" class="logo" />
+    <h1>🔥 Focus mode is ON</h1>
+    <div id="countdown">--:--</div>
+    <p class="quote" id="quote"></p>
+    <div class="riddle">
+      <strong>Puzzle:</strong>
+      <span id="riddle"></span><br />
+      <span class="hint">Answer it after your session, not during 😉</span>
+    </div>
+    <p class="footer">
+      This site is blocked by <strong>blockme</strong>. Finish the timer, and it’ll open again.
+    </p>
+  </div>
+
+  <script src="blocked.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "blockme",
+  "description": "Pomodoro-based website blocker with XP, badges, group study and AI summaries.",
+  "version": "3.0.0",
+  "icons": {
+    "16": "assets/logo.png",
+    "32": "assets/logo.png",
+    "64": "assets/logo.png",
+    "128": "assets/logo.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "assets/logo.png"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": [
+    "storage",
+    "alarms",
+    "declarativeNetRequest",
+    "declarativeNetRequestFeedback",
+    "notifications"
+  ],
+  "host_permissions": [
+    "<all_urls>",
+    "https://blockme-5c871-default-rtdb.firebaseio.com/*",
+    "https://YOUR_VERCEL_DOMAIN.vercel.app/*"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "blocked.html",
+        "blocked.js",
+        "assets/*"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

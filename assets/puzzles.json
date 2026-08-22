@@ -1,0 +1,12 @@
+{
+  "riddles": [
+    { "q": "I speak without a mouth and hear without ears.", "a": "An echo." },
+    { "q": "What has keys but cannot open locks?", "a": "A piano." },
+    { "q": "The more you take, the more you leave behind.", "a": "Footsteps." },
+    { "q": "What has a head and a tail but no body?", "a": "A coin." },
+    { "q": "What gets wetter while drying?", "a": "A towel." },
+    { "q": "I have branches, but no fruit, trunk, or leaves.", "a": "A bank." },
+    { "q": "What has one eye but cannot see?", "a": "A needle." },
+    { "q": "What room has no doors or windows?", "a": "A mushroom." }
+  ]
+}
